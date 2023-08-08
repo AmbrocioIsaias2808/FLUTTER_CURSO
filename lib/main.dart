@@ -1,4 +1,5 @@
 
+import "package:contador/presentacion/pantallas/detalles/Detalles.dart";
 import "package:flutter/material.dart";
 
 void main(){
@@ -17,97 +18,134 @@ class Raiz extends StatelessWidget {
           primarySwatch: Colors.green
       ),
       title: "Mi primera app",
-      home: DetallesScreen(),
+      home: HomeScreen(),
     );
   }
 }
 
-class DetallesScreen extends StatelessWidget {
-  const DetallesScreen({super.key});
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-
-    Widget fila =  Padding(
-      padding: EdgeInsets.all(20),
-      child:  Row(
-        children: [
-          Column(
-              children:[
-                Text("Lago de Chapala", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
-                Text("Jalisco y Michoacán", style: TextStyle(fontSize: 15),),
-              ]
-          ),
-          Expanded(child: SizedBox()),
-          Column(
-            children: [
-              Icon(Icons.star, color: Colors.red,),
-              Text("4.5", style: TextStyle(fontSize: 20),),
-            ],
-          )
-
-
-
-
-
-
-        ],
-      ),
-    );
-
-
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Home"),
+      ),
+      drawer: MenuLateral(),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.message),
+        onPressed: (){},
+      ),
       body: Column(
-          children: [
-            Image.network("https://www.ceajalisco.gob.mx/img/chapala/chapala-sep2010.jpg"),
-            fila,
-            Row(
+        children: [
+          Container(
+            width: double.infinity,
+            child: Card(
+              elevation: 6,
+              color: Colors.green,
+              child: Padding(
+                  padding: EdgeInsets.all(20),
+                  child: Text("Bienvenido!!!", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),)),
+            ),
+          ),
+          Expanded(
+            child: ListView(
               children: [
-                Expanded(
-                  child: Column(
-                    children:[
-                      Icon(Icons.call, color: Colors.blue),
-                      Text("Llamar", style: TextStyle(fontSize: 15, color: Colors.blue))
-                    ]
+                ListTile(
+                  leading: CircleAvatar(
+                    child: Text("C"),
                   ),
+                  title: Text("Contador"),
+                  subtitle: Text("Una app de contar"),
+                  trailing: Icon(Icons.arrow_forward_ios),
                 ),
-
-                Expanded(
-                  child: Column(
-                      children:[
-                        Icon(Icons.send_outlined, color: Colors.blue),
-                        Text("Ruta", style: TextStyle(fontSize: 15, color: Colors.blue))
-                      ]
+                ListTile(
+                  leading: CircleAvatar(
+                    child: Text("D"),
+                    backgroundColor: Colors.brown,
                   ),
+                  title: Text("Detalles"),
+                  subtitle: Text("Lago de Chapala"),
+                  trailing: Icon(Icons.arrow_forward_ios),
                 ),
-
-                Expanded(
-                  child: Column(
-                      children:[
-                        Icon(Icons.share, color: Colors.blue),
-                        Text("Share", style: TextStyle(fontSize: 15, color: Colors.blue))
-                      ]
+                ListTile(
+                  leading: CircleAvatar(
+                    child: Text("C"),
+                    backgroundColor: Colors.red,
                   ),
-                ),
-
-
-
+                  title: Text("Configuracion"),
+                  subtitle: Text("Configuracion"),
+                  trailing: Icon(Icons.arrow_forward_ios),
+                  onTap: (){},
+                )
               ],
             ),
-            Padding(
-              padding: EdgeInsets.all(20),
-              child: Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                textAlign: TextAlign.justify,
-              ),
-            )
-
-
-
-          ]
+          )
+        ],
       ),
     );
   }
 }
+
+
+class MenuLateral extends StatelessWidget {
+  const MenuLateral({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: Column(
+        children: [
+          Container(
+            width: double.infinity,
+            height: 200,
+            color: Colors.blue,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                SizedBox(
+                  width: 100,
+                  height: 100,
+                  child: CircleAvatar(
+                    backgroundImage: NetworkImage("https://www.dzoom.org.es/wp-content/uploads/2020/02/portada-foto-perfil-redes-sociales-consejos.jpg"),
+                  ),
+                ),
+                Text("AMBROCIO LAUREANO", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),)
+              ],
+            ),
+          ),
+          Expanded(child: ListView(
+            children: [
+                ListTile(
+                  leading: Icon(Icons.home),
+                  title: Text("Home"),
+                ),
+              ListTile(
+                leading: Icon(Icons.watch),
+                title: Text("Contador"),
+              ),
+              ListTile(
+                leading: Icon(Icons.file_copy),
+                title: Text("Detalles"),
+              ),
+              ListTile(
+                leading: Icon(Icons.handyman),
+                title: Text("Configuracion"),
+              ),
+            ],
+          ))
+          
+        ]
+      ),
+    );
+  }
+}
+
+
+
+
+
 
 
 
