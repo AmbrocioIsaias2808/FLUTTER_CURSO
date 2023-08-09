@@ -1,4 +1,5 @@
 
+import "package:contador/presentacion/pantallas/contador/ContadorScreen.dart";
 import "package:contador/presentacion/pantallas/detalles/Detalles.dart";
 import "package:flutter/material.dart";
 
@@ -59,6 +60,9 @@ class HomeScreen extends StatelessWidget {
                   title: Text("Contador"),
                   subtitle: Text("Una app de contar"),
                   trailing: Icon(Icons.arrow_forward_ios),
+                  onTap: (){
+
+                  },
                 ),
                 ListTile(
                   leading: CircleAvatar(
@@ -68,6 +72,10 @@ class HomeScreen extends StatelessWidget {
                   title: Text("Detalles"),
                   subtitle: Text("Lago de Chapala"),
                   trailing: Icon(Icons.arrow_forward_ios),
+                  onTap: (){
+
+                  }
+                  
                 ),
                 ListTile(
                   leading: CircleAvatar(
@@ -120,18 +128,22 @@ class MenuLateral extends StatelessWidget {
                 ListTile(
                   leading: Icon(Icons.home),
                   title: Text("Home"),
+                  onTap: (){},
                 ),
               ListTile(
                 leading: Icon(Icons.watch),
                 title: Text("Contador"),
+                onTap: (){},
               ),
               ListTile(
                 leading: Icon(Icons.file_copy),
                 title: Text("Detalles"),
+                onTap: (){},
               ),
               ListTile(
                 leading: Icon(Icons.handyman),
                 title: Text("Configuracion"),
+                onTap: (){},
               ),
             ],
           ))
