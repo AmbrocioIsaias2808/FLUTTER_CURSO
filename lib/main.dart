@@ -1,10 +1,26 @@
-
+import "package:contador/Controlador.dart";
 import "package:contador/presentacion/pantallas/contador/ContadorScreen.dart";
 import "package:contador/presentacion/pantallas/detalles/Detalles.dart";
 import "package:flutter/material.dart";
+import "package:provider/provider.dart";
 
 void main(){
-  return runApp(Raiz());
+  return runApp(Suelo());
+}
+
+
+class Suelo extends StatelessWidget {
+  const Suelo({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (context)=> Controlador()),
+        ],
+      child: Raiz(),
+    );
+  }
 }
 
 
@@ -16,10 +32,15 @@ class Raiz extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-          primarySwatch: Colors.green
+          brightness: context.watch<Controlador>().modoOscuro ? Brightness.dark :  Brightness.light
       ),
       title: "Mi primera app",
       home: HomeScreen(),
+      routes: {
+        "/home" : (context)=> HomeScreen(),
+        "/contador" : (context)=> ContadorScreen(),
+        "/detalles" : (context) => DetallesScreen()
+      },
     );
   }
 }
@@ -36,7 +57,9 @@ class HomeScreen extends StatelessWidget {
       drawer: MenuLateral(),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.message),
-        onPressed: (){},
+        onPressed: (){
+            context.read<Controlador>().cambiarTema();
+        },
       ),
       body: Column(
         children: [
@@ -61,7 +84,7 @@ class HomeScreen extends StatelessWidget {
                   subtitle: Text("Una app de contar"),
                   trailing: Icon(Icons.arrow_forward_ios),
                   onTap: (){
-
+                      Navigator.pushNamed(context, "/contador");
                   },
                 ),
                 ListTile(
@@ -73,7 +96,7 @@ class HomeScreen extends StatelessWidget {
                   subtitle: Text("Lago de Chapala"),
                   trailing: Icon(Icons.arrow_forward_ios),
                   onTap: (){
-
+                      Navigator.pushNamed(context, "/detalles");
                   }
                   
                 ),
@@ -128,17 +151,23 @@ class MenuLateral extends StatelessWidget {
                 ListTile(
                   leading: Icon(Icons.home),
                   title: Text("Home"),
-                  onTap: (){},
+                  onTap: (){
+
+                  },
                 ),
               ListTile(
                 leading: Icon(Icons.watch),
                 title: Text("Contador"),
-                onTap: (){},
+                onTap: (){
+                  Navigator.pushNamed(context, "/contador");
+                },
               ),
               ListTile(
                 leading: Icon(Icons.file_copy),
                 title: Text("Detalles"),
-                onTap: (){},
+                onTap: (){
+                  Navigator.pushNamed(context, "/detalles");
+                },
               ),
               ListTile(
                 leading: Icon(Icons.handyman),
